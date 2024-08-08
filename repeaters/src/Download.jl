@@ -1,19 +1,28 @@
-module PreProcessing
-using CSV
-using DataFrames
-using Statistics
+using Downloads
+
 
 export readRN3, readcat1
 
 # Define your functions, types, and variables here
 
 function readRN3()
-    RN3 = CSV.read("./data/chimefrb2023repeaters.csv",DataFrame);
+    http_response= Downloads.download("https://storage.googleapis.com/chimefrb-dev.appspot.com/catalog1/chimefrbcat1.csv")
+    RN3 = CSV.File(http_response);
+    RN3 = DataFrame(RN3);
     return reduceDataFrame(RN3);
 end
 
-function readcat1()
-    Cat1 = CSV.read("./data/chimefrbcat1.csv",DataFrame);
+function downloadCat1()
+    http_response= Downloads.download("https://storage.googleapis.com/chimefrb-dev.appspot.com/catalog1/chimefrbcat1.csv")
+    return http_response;
+end
+
+function readcat1(path="")
+    if path == ""
+        Cat1 = CSV.read(downloadCat1(),DataFrame);
+    else
+        Cat1 = CSV.read(path,DataFrame);
+    end
     return reduceDataFrame(Cat1);
 end
 
@@ -51,6 +60,4 @@ function reduceDataFrame(df; cols = ["tns_name","repeater_name", "dm_fitb","bc_w
     redufeatdf = combine(groupfeatdf, :repeater_name=>unique, :sub_num => maximum, Not(:repeater_name,:tns_name, :sub_num) .=> mean; renamecols=false);
 
     return redufeatdf;
-end
-
 end
