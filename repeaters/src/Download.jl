@@ -5,21 +5,23 @@ export readRN3, readcat1
 
 # Define your functions, types, and variables here
 
-function readRN3()
-    http_response= Downloads.download("https://storage.googleapis.com/chimefrb-dev.appspot.com/catalog1/chimefrbcat1.csv")
-    RN3 = CSV.File(http_response);
-    RN3 = DataFrame(RN3);
-    return reduceDataFrame(RN3);
+function downloadData(path)
+    http_response= Downloads.download(path)
+    return http_response;
 end
 
-function downloadCat1()
-    http_response= Downloads.download("https://storage.googleapis.com/chimefrb-dev.appspot.com/catalog1/chimefrbcat1.csv")
-    return http_response;
+function readRN3(path="")
+    if path == ""
+        RN3 = CSV.read(downloadData("https://storage.googleapis.com/chimefrb-dev.appspot.com/repeater_catalog/chimefrb2023repeaters.csv"),DataFrame);
+    else
+        RN3 = CSV.read(path,DataFrame);
+    end
+    return reduceDataFrame(RN3);
 end
 
 function readcat1(path="")
     if path == ""
-        Cat1 = CSV.read(downloadCat1(),DataFrame);
+        Cat1 = CSV.read(downloadData("https://storage.googleapis.com/chimefrb-dev.appspot.com/catalog1/chimefrbcat1.csv"),DataFrame);
     else
         Cat1 = CSV.read(path,DataFrame);
     end
