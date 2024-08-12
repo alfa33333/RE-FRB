@@ -151,9 +151,8 @@ end
 """
     Weight vector
 """
-function V(x)
-    # inverse of V_i
-    return x * (1 - x)
+function weightVector(w0, w1, y)
+	return w1* y .+ w0*(1 .- y)
 end
 
 """
