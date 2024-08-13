@@ -155,6 +155,11 @@ function weightVector(w0, w1, y)
 	return w1* y .+ w0*(1 .- y)
 end
 
+function V(x)
+    # inverse of V_i
+    return x * (1 - x)
+end
+
 """
     Rare-Event Weighted Logistic Regression algorigthm  (RE-WLR)
     The algorigthn is based on the paper:

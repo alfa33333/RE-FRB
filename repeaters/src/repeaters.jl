@@ -1,6 +1,7 @@
 module repeaters
 
 using StatsFuns: logistic
+using LinearAlgebra
 using GLM
 using CSV
 using DataFrames
