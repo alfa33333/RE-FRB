@@ -1,5 +1,6 @@
 module repeaters
 
+using Plots, StatsPlots
 using StatsFuns: logistic
 using LinearAlgebra
 using GLM
@@ -16,6 +17,7 @@ include("splitData.jl")
 include("rareEventsDefinitions.jl")
 include("Coeficients.jl")
 include("metrics.jl")
+include("Plotting.jl")
 
 
 export modelStatsUn
