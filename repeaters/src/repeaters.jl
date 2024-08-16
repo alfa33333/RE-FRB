@@ -14,6 +14,8 @@ using ProgressLogging
 include("Download.jl")
 include("splitData.jl")
 include("rareEventsDefinitions.jl")
+include("Coeficients.jl")
+include("metrics.jl")
 
 
 export modelStatsUn

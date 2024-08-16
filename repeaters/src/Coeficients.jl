@@ -1,4 +1,6 @@
 
+export extractCoef
+
 """
     extractCoef(container::LogisticClassifier)
 
