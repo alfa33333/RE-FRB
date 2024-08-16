@@ -13,7 +13,7 @@ export plotTau
         title="Repeaters": The title of the plot
         ylabel="Percentage/100": The label of the y-axis
 """
-function plotTau(dfstat, label::String; xmin=0.1, xmax=0.9, title="Repeaters", ylabel="Percentage/100" )
+function plotTau(dfstat, label::String; xmin=0.1, xmax=0.9, title="Repeaters", ylabel="Percentage/100",Save=false, filename="Repeaters" )
 	tauV = dfstat.tau
 	plot(tauV, dfstat.med, ribbon=(dfstat.med-dfstat.Q1,dfstat.Q3-dfstat.med), label=label)
 	plot!(tauV, dfstat.med, color=:purple, label="median")
@@ -23,6 +23,9 @@ function plotTau(dfstat, label::String; xmin=0.1, xmax=0.9, title="Repeaters", y
 	xlims!(xmin,xmax)
 	xlabel!("τ")
 	ylabel!("Percentage/100")
+    if Save
+        savefig("$(filename).png")
+    end
 end
 
 """
