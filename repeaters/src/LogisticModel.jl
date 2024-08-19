@@ -33,7 +33,7 @@ end
 struct  predictionsModel <: LogisticModel
     predictions::AbstractVecOrMat
     tau::Real
-    name::string
+    name::String
 end
 
 function createLogisticModel(coefficients::DataFrame, tau)
