@@ -35,8 +35,8 @@ function splitDataframe(cat1_df::DataFrame, RN3_df::DataFrame)
     
     removed1_redu_df = filter([:tns_name, :repeater_name] => (x,y) -> !any(x .== sharedList .|| y .== sharedList), ind_redu_df)
     removed1_rn3_df = filter([:tns_name, :repeater_name] => (x,y) -> !any(x .== sharedList .|| y .== sharedList), ind_rn3_df)
-    enhanced3_df = vcat(removed1_redu_df, removed1_rn3_df)
-    
-    
-    return enhanced3_df, sharedList
+    trainingSet = vcat(removed1_redu_df, removed1_rn3_df)
+    trueSet = filter([:tns_name, :repeater_name] => (x,y) -> any(x .== sharedList .|| y .== sharedList), ind_redu_df)
+    trueSet.class .= 1
+    return trainingSet, trueSet
 end
