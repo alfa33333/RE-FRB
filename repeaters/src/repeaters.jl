@@ -18,6 +18,7 @@ include("rareEventsDefinitions.jl")
 include("Coeficients.jl")
 include("metrics.jl")
 include("Plotting.jl")
+include("LogisticModel.jl")
 
 
 export modelStatsUn
