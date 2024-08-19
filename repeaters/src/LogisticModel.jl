@@ -42,7 +42,7 @@ function createLogisticModel(coefficients::DataFrame, tau)
         select(Not(:tau))
     end
     coefMatrix = Matrix(coefModel)
-    return LogisticModel(coefMatrix, tau)
+    return coefficientsModel(coefMatrix, tau)
 end
 
 function extractTestModel(df::DataFrame, lgformula)
@@ -53,8 +53,8 @@ end
 
 function selectSample(df::DataFrame, name::String)
     sample = @chain df begin
-        filter(:name => x -> x == name)
-        select(:name, Not(:class))
+        filter(:tns_name => x -> x == name, _)
+        select(Not(:tns_name))
     end
     sample = [float(v) for v in values(sample[1,:])]
     return sampleModel(sample, name)
@@ -62,11 +62,11 @@ end
 
 
 function predictLogisticModel(model::LogisticModel, sample::sampleModel; intercept=false)
-    if intercept
+    if !intercept
         data = vcat(1, sample.features)
     else
         data = sample
     end
     etavector  = model.coef * data 
-    return predict(logistic(etavector), model.tau, sample.name)
+    return predictionsModel(logistic.(etavector), model.tau, sample.name)
 end

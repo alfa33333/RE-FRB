@@ -81,4 +81,5 @@ function modelStatsUn(df::DataFrame, lgformula, tauV, n::Int;testPercent::Real=0
 	return classifierVector
 end;
 
+
 end # module repeaters
