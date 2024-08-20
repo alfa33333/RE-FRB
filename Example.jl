@@ -39,7 +39,7 @@ modelCoef = extractCoef(vectorenhanced, lgpeak); ## Extract the coefficients fro
 logModel = createLogisticModel(modelCoef, 0.1); ## Create the logistic model fromt he coefficients and the tau value
 trueTestSet = extractTestModel(test, lgpeak); ## Extract the test set
 sample = selectSample(trueTestSet, "FRB20180909A"); ## Select a sample from the test set
-predictions = predict(logModel, sample); ## Predict the probabilities of the sample belonging to the class
+predictions = predictLogisticModel(logModel, sample); ## Predict the probabilities of the sample belonging to the class
 
 ## plot predictions histogram
 plotPredictions(predictions, Save=true)
