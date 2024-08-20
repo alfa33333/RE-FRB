@@ -1,4 +1,4 @@
-export plotTau
+export plotTau, plotPredictions
 
 """
     plotTau(dfstat, label::String; xmin=0.1, xmax=0.9, title="Repeaters", ylabel="Percentage/100" )
@@ -51,5 +51,27 @@ function plotTau(dfstat; xmin=0.1, xmax=0.9, title="Repeaters", ylabel="Percenta
 	ylabel!("Percentage/100")
     if Save
         savefig("$(filename).png")
+    end
+end
+
+"""
+    plotPredictions(prediction::LogisticModel)
+
+    Plots the histogram of the predictions
+
+    Arguments:
+        prediction: The predictions to be plotted
+    optional:
+        Save: If true saves the plot to a file
+"""
+function plotPredictions(prediction::LogisticModel; Save=false)
+    histogram(prediction.predictions, label=false)
+    vline!([0.5], label="Threshold", color=:red)
+    title!("Predictions for $(prediction.name)")
+    xlims!(0,1)
+    xlabel!("Probability")
+    ylabel!("Frequency")
+    if Save
+        savefig("histogram-$(prediction.name).png")
     end
 end

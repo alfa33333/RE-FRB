@@ -1,5 +1,6 @@
 module repeaters
 
+
 using Plots, StatsPlots
 using StatsFuns: logistic
 using LinearAlgebra
@@ -17,9 +18,8 @@ include("splitData.jl")
 include("rareEventsDefinitions.jl")
 include("Coeficients.jl")
 include("metrics.jl")
-include("Plotting.jl")
 include("LogisticModel.jl")
-
+include("Plotting.jl")
 
 export modelStatsUn
 
@@ -29,17 +29,17 @@ export modelStatsUn
 	Runs the model n times and returns a vector of classifiers with the coefficients, tau, predicted probabilities and the validation set
 
 	Arguments:
-		df::DataFrame: The dataframe to be used for training and testing
+		df::DataFrame: The dataframe to be used for training and validation
 		lgformula: The formula to be used for the logistic regression model
 		tauV: The vector of tau values to be used for the weighted logistic regression
 		n::Int: The number of times to run the model
-		testPercent::Real=0.1: The percentage of the data to be used for testing
-		source=false: Whether the source column should be included in the training and testing dataframes
-		colname="tns_name": The name of the column to be used for the test set
+		testPercent::Real=0.1: The percentage of the data to be used for validation
+		source=false: Whether the source column should be included in the training dataframes
+		colname="tns_name": The name of the column to be used for the validation set
 		progress="log": The type of progress bar to be used
 
 	Returns:
-		classifierVector: A vector of classifiers with the coefficients, tau, predicted probabilities, and the test set
+		classifierVector: A vector of classifiers with the coefficients, tau, predicted probabilities, and the validation set
 """
 function modelStatsUn(df::DataFrame, lgformula, tauV, n::Int;testPercent::Real=0.1, source=false, colname="tns_name", progress="log")
 	classifierVector = Vector{LogisticClassifier}()

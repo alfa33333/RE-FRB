@@ -1,5 +1,5 @@
 
-export extractCoef
+export extractCoef, saveCoefficients, loadCoefficients
 
 """
     extractCoef(container::LogisticClassifier)
@@ -48,4 +48,22 @@ function extractCoef(containerVector::AbstractVector{LogisticClassifier}, lgform
         push!(coefdf, [coef; tau])
     end
     return coefdf
+end
+
+"""
+    saveCoefficients(coefdf::DataFrame, filename::String)
+
+    Saves the coefficients in a DataFrame to a csv file
+"""
+function saveCoefficients(coefdf::DataFrame, filename::String)
+    CSV.write("$(filename).csv", coefdf)
+end
+
+"""
+    loadCoefficients(filename::String)
+
+    Loads the coefficients from a csv file into a DataFrame
+"""
+function loadCoefficients(filename::String)
+    return CSV.read(filename,DataFrame)
 end
