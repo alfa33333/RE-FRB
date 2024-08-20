@@ -14,7 +14,7 @@ From Julia's REPL
 
 ```
 using Pkg;
-Pkg.Activate("./repeaters");
+Pkg.activate("./repeaters");
 include("Example.jl")
 ```
 From terminal:
