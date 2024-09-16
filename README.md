@@ -7,7 +7,7 @@ This package is not part of the general repository of Julia, so it is necessary 
 
 First it is necessary to clone the repository and instantiate the package, so all the appropriate dependencies are installed:
 ```
-git clone [https://www.github.com/my/toplevel/package/linking/all/others ](https://github.com/alfa33333/RE-FRB.git)
+git clone https://github.com/alfa33333/RE-FRB.git
 cd RE-FRB
 julia --project=./repeaters  -e 'using Pkg; Pkg.instantiate()'
 ```
